@@ -12,13 +12,14 @@ namespace FlappyRunner.CharacterControl
 
         public void MoveByY(int direction)
         {
+            if (moveTween != null && moveTween.IsActive()) return;
+
             var currentPosition = transform.position;
 
             if ((currentPosition.y == _moveOffset && direction == 1) ||
                 (currentPosition.y == -_moveOffset && direction == -1))
                 return;
 
-            moveTween?.Kill();
 
             moveTween = transform.DOMoveY(currentPosition.y + _moveOffset * direction, _moveDuration);
         }
